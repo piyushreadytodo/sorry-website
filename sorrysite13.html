@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Meena 💖</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500&display=swap');
+
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #ffc0cb, #ffe4e1);
+    overflow: hidden;
+}
+
+/* moving background text */
+.bg {
+    position: fixed;
+    width: 200%;
+    height: 200%;
+    opacity: 0.05;
+    font-size: 38px;
+    transform: rotate(-20deg);
+    animation: moveBg 30s linear infinite;
+}
+@keyframes moveBg {
+    from { transform: translate(0,0) rotate(-20deg); }
+    to { transform: translate(-300px,-300px) rotate(-20deg); }
+}
+
+/* card */
+.box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    text-align: center;
+    background: rgba(255,255,255,0.6);
+    padding: 35px;
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    max-width: 90%;
+}
+
+/* buttons */
+button {
+    padding: 10px 22px;
+    margin: 10px;
+    border: none;
+    border-radius: 25px;
+    font-size: 16px;
+    cursor: pointer;
+    background: #ff6f91;
+    color: white;
+    transition: 0.3s;
+}
+button:hover { transform: scale(1.05); }
+
+.hidden { display: none; }
+
+/* typing */
+#typedText {
+    white-space: pre-line;
+    font-size: 18px;
+}
+
+/* floating hearts */
+.heart {
+    position: fixed;
+    color: #ff6f91;
+    font-size: 18px;
+    animation: floatUp 6s linear infinite;
+}
+@keyframes floatUp {
+    from { transform: translateY(0); opacity:1; }
+    to { transform: translateY(-100vh); opacity:0; }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- background -->
+<div class="bg">
+<script>
+for(let i=0;i<100;i++){
+document.write("sorry meena ");
+}
+</script>
+</div>
+
+<!-- Q1 -->
+<div id="q1" class="box">
+<h2>Please Meena… forgive me 💖</h2>
+<button onclick="goCelebrate()">Yes</button>
+<button onclick="goQ2()">No</button>
+</div>
+
+<!-- Q2 -->
+<div id="q2" class="box hidden">
+<h2>I’m still here… waiting for you.</h2>
+<button id="forgiveBtn" onclick="goQ3()">Okay</button>
+<button id="noBtn">No</button>
+</div>
+
+<!-- Q3 -->
+<div id="q3" class="box hidden">
+<h2>I really mean it… please give me one more chance.</h2>
+<button onclick="goFinal()">Alright</button>
+<button onclick="goFinal()">I forgive you</button>
+</div>
+
+<!-- Celebration -->
+<div id="celebrate" class="box hidden">
+
+<h2>😄 Someone said YES!!</h2>
+
+<p style="opacity:0.8;">
+Okay… I’ll act normal now 😌  
+But honestly… this made me really happy 💖
+</p>
+
+<img src="https://i.imgur.com/4M7IWwP.png"
+style="width:160px; margin:15px 0; border-radius:10px;">
+
+<p style="font-size:14px; opacity:0.7;">
+(I was scared you’d press “No”… not gonna lie 😭)
+</p>
+
+<button id="continueBtn" class="hidden" onclick="goFinal()">Continue 💞</button>
+
+</div>
+
+<!-- FINAL -->
+<div id="final" class="box hidden">
+<div id="typedText"></div>
+</div>
+
+<script>
+
+/* navigation */
+function goQ2(){ q1.classList.add("hidden"); q2.classList.remove("hidden"); }
+function goQ3(){ q2.classList.add("hidden"); q3.classList.remove("hidden"); }
+
+function goCelebrate(){
+    q1.classList.add("hidden");
+    celebrate.classList.remove("hidden");
+
+    setTimeout(()=>{
+        continueBtn.classList.remove("hidden");
+    },4000);
+}
+
+function goFinal(){
+    q1.classList.add("hidden");
+    q2.classList.add("hidden");
+    q3.classList.add("hidden");
+    celebrate.classList.add("hidden");
+
+    final.classList.remove("hidden");
+
+    typeText();
+    hearts();
+}
+
+/* move no button */
+let noBtn = document.getElementById("noBtn");
+let forgiveBtn = document.getElementById("forgiveBtn");
+let size = 16;
+
+document.addEventListener("mousemove", e=>{
+    if(!q2.classList.contains("hidden")){
+        let rect = noBtn.getBoundingClientRect();
+        if(Math.abs(e.clientX - rect.left) < 80){
+            noBtn.style.transform = `translate(${Math.random()*100-50}px, ${Math.random()*50-25}px)`;
+            size += 1;
+            forgiveBtn.style.fontSize = size + "px";
+        }
+    }
+});
+
+/* typing */
+let text = `Meena,
+
+I know I made mistakes…
+but what I feel is real.
+
+You matter to me more than I can explain.
+
+If you give me another chance,
+I’ll make sure I never hurt you again.
+
+— always your dumb guy`;
+
+function typeText(){
+    let i=0;
+    function typing(){
+        if(i < text.length){
+            document.getElementById("typedText").innerHTML += text.charAt(i);
+            i++;
+            setTimeout(typing,35);
+        }
+    }
+    typing();
+}
+
+/* hearts */
+function hearts(){
+    setInterval(()=>{
+        let h = document.createElement("div");
+        h.className = "heart";
+        h.innerHTML = "❤";
+        h.style.left = Math.random()*100+"vw";
+        document.body.appendChild(h);
+        setTimeout(()=>h.remove(),6000);
+    },300);
+}
+
+</script>
+
+</body>
+</html>
+</body>
+</html>
